@@ -1,13 +1,11 @@
 import accountApi from "@/api/account.js"
-// import API_BASE_URL from "@/config/index.js"
-// import axios from 'axios';
-
 
 const userStore = {
     namespaced: true,
     state: {
         user: null,
         token: null,
+        test: "testCall"
     },
     mutations: {
         setUser(state, user) {
@@ -26,27 +24,14 @@ const userStore = {
         },
     },
     actions: {
-        fetchUser({ state, commit }, callback) {
+        fetchUser({ state, commit }) {
         console.log("token", state.token);
-        state.user
-            ? callback && callback()
-            : accountApi.getUser()
-                .then(res => {
-                    console.log("fetchUser : " + res.data)
-                    commit("setUser", res.user)
-            })
+            accountApi.getUser((res) => {
+                console.log(res.data)
+                commit("setUser", res.data)
+        })
         },
     },
 };
 
 export default userStore;
-
-// axios.get("http://localhost:8080/api/v1/" + 'user/me', {
-//                 headers: {
-//                     Authorization: 'Bearer '+state.token
-//                 }
-//             }).then(res => {
-//                 console.log(res.data)
-//                 commit("setUser", res.user);
-//                 callback && callback();
-//             });

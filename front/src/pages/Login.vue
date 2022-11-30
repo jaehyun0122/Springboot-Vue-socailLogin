@@ -48,7 +48,7 @@ export default {
     kakao() {
       // location.href =
       //   "http://localhost:8080/oauth2/authorization/kakao?redirect_uri=http://localhost:3000/oauth/redirect";
-      axios.get(API_BASE_URL+'/api/v1/user/me',{
+      axios.get(API_BASE_URL+'/user/me',{
         headers:{
           Authorization: "Bearer "+this.token
         }
